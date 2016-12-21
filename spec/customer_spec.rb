@@ -33,7 +33,7 @@ describe Customer do
   end
 
   describe "#statement" do
-    it "outputs the corrent result string" do
+    it "outputs the correct result string" do
       customer = Customer.new("Jay Sanchez")
       movie1 = Movie.new("movie1", 0)
       movie2 = Movie.new("movie2", 1)
@@ -46,6 +46,24 @@ describe Customer do
       customer.add_rental(rental2)
 
       expect(customer.statement).to eq result
+    end
+  end
+
+  describe "#html_statement" do
+    it "outputs the correct result html string" do
+      customer = Customer.new("Jay Sanchez")
+      movie1 = Movie.new("movie1", 0)
+      movie2 = Movie.new("movie2", 1)
+      rental1 = Rental.new(movie1, 3)
+      rental2 = Rental.new(movie2, 5)
+      result = "<h1>Rentals for <em>Jay Sanchez</em></h1><p>\n\tmovie1: "
+      result += "3.5<br>\n\tmovie2: 15<br>\n<p>You owe <em>18.5</em><p>\nOn" 
+      result += " this rental you earned <em>3</em> frequent renter points<p>"
+
+      customer.add_rental(rental1)
+      customer.add_rental(rental2)
+
+      expect(customer.html_statement).to eq result
     end
   end
 end
